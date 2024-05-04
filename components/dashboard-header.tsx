@@ -17,7 +17,7 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { config, dashboardNavigation } from "@/config";
 import { cn } from "@/lib/utils";
 import { User } from "@supabase/supabase-js";
-import { PanelLeft, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -32,7 +32,7 @@ export function DashboardHeader({ user }: { user: User }) {
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button size="icon" variant="outline" className="sm:hidden">
-            <PanelLeft className="h-5 w-5" />
+            <Icons.menuLeft className="h-5 w-5" />
             <span className="sr-only">Toggle Menu</span>
           </Button>
         </SheetTrigger>

@@ -21,6 +21,7 @@ import {
   Menu,
   Moon,
   MoreVertical,
+  PanelLeft,
   Pizza,
   Plus,
   Settings,
@@ -57,6 +58,7 @@ export const Icons = {
   laptop: Laptop,
   login: LogIn,
   logout: LogOut,
+  menuLeft: PanelLeft,
   menu: Menu,
   externalLink: ExternalLink,
   twitter: (props: LucideProps) => (
