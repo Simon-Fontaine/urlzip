@@ -10,10 +10,13 @@ interface NavigationItem {
   label?: string;
 }
 
+const name = "URLzip";
+
 export const config = {
-  name: "URLzip",
+  name: name,
   url: "https://urlzip.xyz",
-  description: "Easily shorten URLs and share them with others.",
+  description: `${name} is a free and open-source URL shortener that allows you to shrink, share, and track URLs. 
+  Get insights on your audience and optimize your marketing campaigns.`,
   links: {
     github: "https://github.com/",
     discord: "https://discord.com/",
