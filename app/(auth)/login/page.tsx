@@ -2,9 +2,9 @@ import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { UserLoginForm } from "@/components/user-login-form";
 import { cn } from "@/lib/utils";
-import { ChevronLeft } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -34,7 +34,9 @@ export default function LoginPage() {
             Enter your email to sign in to your account
           </p>
         </div>
-        <UserLoginForm />
+        <Suspense fallback={<div>Loading...</div>}>
+          <UserLoginForm />
+        </Suspense>
         <p className="px-8 text-center text-sm text-muted-foreground">
           <Link
             href="/register"

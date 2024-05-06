@@ -1,9 +1,7 @@
 "use client";
 
 import { Icons } from "./icons";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { toast } from "./ui/use-toast";
+import { Separator } from "./ui/separator";
 import { config } from "@/config";
 import { cn } from "@/lib/utils";
 import { motion, MotionProps } from "framer-motion";
@@ -27,7 +25,7 @@ export const RevealBento = () => {
         <SocialsBlock />
         <AboutBlock />
         <LocationBlock />
-        <EmailListBlock />
+        <StatisticsBlock />
       </motion.div>
     </div>
   );
@@ -59,7 +57,7 @@ const Block = ({ className, ...rest }: BlockProps) => {
         damping: 50,
       }}
       className={cn(
-        "col-span-4 rounded-lg border border-slate-200 bg-white p-6 text-slate-950 shadow-sm dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50",
+        "rounded-lg border bg-card p-6 text-card-foreground  shadow-sm",
         className,
       )}
       {...rest}
@@ -79,13 +77,13 @@ const HeaderBlock = () => (
     />
     <h1 className="mb-12 text-4xl font-medium leading-tight">
       Hi, I'm Hestia.{" "}
-      <span className="text-zinc-400">
+      <span className="text-muted-foreground">
         Creator and founder of {config.name}
       </span>
     </h1>
     <a
       href="mailto:contact@urlzip.xyz"
-      className="group flex items-center gap-1 text-red-500 hover:underline dark:text-red-600"
+      className="group flex items-center gap-1 text-primary hover:underline"
     >
       Contact me{" "}
       <ArrowRight className="group h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -105,7 +103,7 @@ const SocialsBlock = () => (
       <Link
         href={config.links.discord}
         target="_blank"
-        className="grid h-full place-content-center text-3xl text-white"
+        className="grid h-full place-content-center text-3xl"
       >
         <Icons.discord className="h-10 w-10" />
       </Link>
@@ -120,7 +118,7 @@ const SocialsBlock = () => (
       <Link
         href={config.links.github}
         target="_blank"
-        className="grid h-full place-content-center text-3xl text-white"
+        className="grid h-full place-content-center text-3xl"
       >
         <Icons.github className="h-10 w-10" />
       </Link>
@@ -135,7 +133,7 @@ const SocialsBlock = () => (
       <Link
         href={config.links.github}
         target="_blank"
-        className="grid h-full place-content-center text-3xl text-white"
+        className="grid h-full place-content-center text-3xl"
       >
         <Icons.paypal className="h-10 w-10" />
       </Link>
@@ -150,7 +148,7 @@ const SocialsBlock = () => (
       <Link
         href={config.links.twitter}
         target="_blank"
-        className="grid h-full place-content-center text-3xl text-white"
+        className="grid h-full place-content-center text-3xl"
       >
         <Icons.twitter className="h-10 w-10" />
       </Link>
@@ -162,7 +160,7 @@ const AboutBlock = () => (
   <Block className="col-span-12 text-3xl leading-snug">
     <p>
       Lorem ipsum dolor sit amet.{" "}
-      <span className="text-zinc-400">
+      <span className="text-muted-foreground">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Sit amet cursus sit
         amet dictum sit. Fermentum odio eu feugiat pretium nibh ipsum.
@@ -174,41 +172,33 @@ const AboutBlock = () => (
 const LocationBlock = () => (
   <Block className="col-span-12 flex flex-col items-center gap-4 md:col-span-3">
     <MapPin className="text-3xl" />
-    <p className="text-center text-lg text-zinc-400">Brussels, Belgium</p>
+    <p className="text-center text-lg text-muted-foreground">
+      Brussels, Belgium
+    </p>
   </Block>
 );
 
-const EmailListBlock = () => (
+const StatisticsBlock = () => (
   <Block className="col-span-12 md:col-span-9">
-    <p className="mb-3 text-lg">Join my mailing list</p>
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.target as HTMLFormElement);
-
-        toast({
-          title: "You submitted the following value:",
-          description: (
-            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <code className="text-white">
-                {JSON.stringify(Object.fromEntries(formData), null, 2)}
-              </code>
-            </pre>
-          ),
-        });
-      }}
-      className="flex items-center gap-2"
-    >
-      <Input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="Enter your email"
-      />
-      <Button type="submit">
-        <Mail className="mr-2 h-5 w-5" /> Join the list
-      </Button>
-    </form>
+    <div className="grid grid-cols-3 gap-4">
+      <div className="flex flex-col items-center gap-1">
+        <h2 className="text-4xl font-medium">45%</h2>
+        <p className="text-center text-muted-foreground">
+          Lorem ipsum dolor sit amet consectetur
+        </p>
+      </div>
+      <div className="flex flex-col items-center gap-1">
+        <h2 className="text-4xl font-medium">1.2k</h2>
+        <p className="text-center text-muted-foreground">
+          Lorem ipsum dolor sit amet consectetur
+        </p>
+      </div>
+      <div className="flex flex-col items-center gap-1">
+        <h2 className="text-4xl font-medium">20B+</h2>
+        <p className="text-center text-muted-foreground">
+          Lorem ipsum dolor sit amet consectetur
+        </p>
+      </div>
+    </div>
   </Block>
 );

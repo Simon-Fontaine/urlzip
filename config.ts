@@ -34,8 +34,8 @@ export const navigation: NavigationItem[] = [
     href: "/pricing",
   },
   {
-    title: "Statistics",
-    href: "/statistics",
+    title: "Updates",
+    href: "/changelog",
   },
   {
     title: "Dashboard",
