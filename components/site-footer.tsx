@@ -1,4 +1,5 @@
 import { config } from "@/config";
+import Link from "next/link";
 
 export function SiteFooter() {
   return (
@@ -9,6 +10,17 @@ export function SiteFooter() {
             &copy; {new Date().getFullYear()} {config.name}. All rights
             reserved.
           </p>
+        </div>
+        <div className="flex items-center justify-center gap-4">
+          <Link href={config.links["privacy-policy"]} className="text-sm">
+            Privacy Policy
+          </Link>
+          <Link href={config.links["terms-of-service"]} className="text-sm">
+            Terms of Service
+          </Link>
+          <Link href={config.links["cookie-policy"]} className="text-sm">
+            Cookie Policy
+          </Link>
         </div>
       </div>
     </footer>

@@ -78,7 +78,7 @@ const HeaderBlock = () => (
     <h1 className="mb-12 text-4xl font-medium leading-tight">
       Hi, I'm Hestia.{" "}
       <span className="text-muted-foreground">
-        Creator and founder of {config.name}
+        Creator and maintainer of {config.name}.
       </span>
     </h1>
     <a

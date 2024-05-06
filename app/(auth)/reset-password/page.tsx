@@ -1,17 +1,17 @@
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
-import { UserLoginForm } from "@/components/user-login-form";
+import { UserResetPasswordForm } from "@/components/user-reset-password";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "Login",
-  description: "Login to your account",
+  title: "Reset Password",
+  description: "Reset your account password",
 };
 
-export default function LoginPage() {
+export default function ResetPasswordPage() {
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
       <Link
@@ -31,24 +31,24 @@ export default function LoginPage() {
             Welcome back
           </h1>
           <p className="text-sm text-muted-foreground">
-            Enter your email to sign in to your account
+            Enter your email to reset your password
           </p>
         </div>
         <Suspense fallback={<div>Loading...</div>}>
-          <UserLoginForm />
+          <UserResetPasswordForm />
         </Suspense>
         <p className="flex flex-col gap-2 px-8 text-center text-sm text-muted-foreground">
-          <Link
-            href="/reset-password"
-            className="hover:text-brand underline underline-offset-4"
-          >
-            Lost your password? Reset it
-          </Link>
           <Link
             href="/register"
             className="hover:text-brand underline underline-offset-4"
           >
             Don&apos;t have an account? Sign Up
+          </Link>
+          <Link
+            href="/login"
+            className="hover:text-brand underline underline-offset-4"
+          >
+            Remember your password? Sign In
           </Link>
         </p>
       </div>

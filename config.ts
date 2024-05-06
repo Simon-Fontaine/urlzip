@@ -1,5 +1,6 @@
 import { Icons } from "./components/icons";
 import { LucideIcon } from "lucide-react";
+import { version } from "os";
 
 interface NavigationItem {
   title: string;
@@ -14,11 +15,15 @@ const name = "URLzip";
 
 export const config = {
   name: name,
+  version: "0.0.0",
   url: "https://urlzip.xyz",
   description: `${name} is a free and open-source URL shortener that allows you to shrink, share, and track URLs. 
   Get insights on your audience and optimize your marketing campaigns.`,
   links: {
-    github: "https://github.com/",
+    "privacy-policy": "/privacy-policy",
+    "terms-of-service": "/terms-of-service",
+    "cookie-policy": "/cookie-policy",
+    github: "https://github.com/Simon-Fontaine/urlzip",
     discord: "https://discord.com/",
     twitter: "https://twitter.com/",
   },
@@ -35,7 +40,7 @@ export const navigation: NavigationItem[] = [
   },
   {
     title: "Updates",
-    href: "/changelog",
+    href: "/updates",
   },
   {
     title: "Dashboard",

@@ -40,15 +40,17 @@ export function UserRegisterForm() {
       },
     });
 
-    setIsLoading(false);
-
     if (registerResult.error) {
+      setIsLoading(false);
+
       return toast({
         title: "Something went wrong.",
         description: registerResult.error.message,
         variant: "destructive",
       });
     }
+
+    setIsLoading(false);
 
     return toast({
       title: "Success",
@@ -85,7 +87,7 @@ export function UserRegisterForm() {
               disabled={isLoading || isDiscordLoading}
               {...register("email")}
             />
-            {errors?.email && (
+            {errors.email && (
               <p className="px-1 text-xs text-red-600">
                 {errors.email.message}
               </p>
@@ -99,13 +101,13 @@ export function UserRegisterForm() {
               id="password"
               placeholder="••••••••"
               type="password"
-              autoComplete="current-password"
+              autoComplete="new-password"
               autoCapitalize="none"
               autoCorrect="off"
               disabled={isLoading || isDiscordLoading}
               {...register("password")}
             />
-            {errors?.password && (
+            {errors.password && (
               <p className="px-1 text-xs text-red-600">
                 {errors.password.message}
               </p>

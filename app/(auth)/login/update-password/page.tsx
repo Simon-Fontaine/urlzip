@@ -1,21 +1,33 @@
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
-import { UserLoginForm } from "@/components/user-login-form";
+import { UserUpdatePasswordForm } from "@/components/user-update-password";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/utils/supabase/server";
 import { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "Login",
-  description: "Login to your account",
+  title: "Update Password",
+  description: "Update your account password",
 };
 
-export default function LoginPage() {
+export default async function UpdatePasswordPage() {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login?redirect_to=/login/update-password");
+  }
+
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
       <Link
-        href="/"
+        href="/dashboard"
         className={cn(
           buttonVariants({ variant: "ghost" }),
           "group absolute left-4 top-4 md:left-8 md:top-8",
@@ -28,29 +40,15 @@ export default function LoginPage() {
         <div className="flex flex-col space-y-2 text-center">
           <Icons.logo className="mx-auto h-6 w-6" />
           <h1 className="text-2xl font-semibold tracking-tight">
-            Welcome back
+            Update Password
           </h1>
           <p className="text-sm text-muted-foreground">
-            Enter your email to sign in to your account
+            Enter your new password to update your account
           </p>
         </div>
         <Suspense fallback={<div>Loading...</div>}>
-          <UserLoginForm />
+          <UserUpdatePasswordForm />
         </Suspense>
-        <p className="flex flex-col gap-2 px-8 text-center text-sm text-muted-foreground">
-          <Link
-            href="/reset-password"
-            className="hover:text-brand underline underline-offset-4"
-          >
-            Lost your password? Reset it
-          </Link>
-          <Link
-            href="/register"
-            className="hover:text-brand underline underline-offset-4"
-          >
-            Don&apos;t have an account? Sign Up
-          </Link>
-        </p>
       </div>
     </div>
   );

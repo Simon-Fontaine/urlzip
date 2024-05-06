@@ -1,6 +1,7 @@
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { UserRegisterForm } from "@/components/user-register-form";
+import { config } from "@/config";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -18,10 +19,21 @@ export default function RegisterPage() {
         href="/login"
         className={cn(
           buttonVariants({ variant: "ghost" }),
-          "absolute right-4 top-4 md:right-8 md:top-8",
+          "group absolute right-4 top-4 md:right-8 md:top-8",
         )}
       >
         Login
+        <Icons.chevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+      </Link>
+      <Link
+        href="/"
+        className={cn(
+          buttonVariants({ variant: "ghost" }),
+          "group absolute left-4 top-4 md:left-8 md:top-8",
+        )}
+      >
+        <Icons.chevronLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+        Back
       </Link>
       <div className="hidden h-full bg-muted lg:block" />
       <div className="lg:p-8">
@@ -41,14 +53,14 @@ export default function RegisterPage() {
           <p className="px-8 text-center text-sm text-muted-foreground">
             By clicking continue, you agree to our{" "}
             <Link
-              href="/terms"
+              href={config.links["terms-of-service"]}
               className="hover:text-brand underline underline-offset-4"
             >
               Terms of Service
             </Link>{" "}
             and{" "}
             <Link
-              href="/privacy"
+              href={config.links["privacy-policy"]}
               className="hover:text-brand underline underline-offset-4"
             >
               Privacy Policy

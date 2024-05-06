@@ -10,7 +10,7 @@ import { userLoginSchema } from "@/lib/validations/auth";
 import { createClient } from "@/utils/supabase/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -30,6 +30,16 @@ export function UserLoginForm() {
     resolver: zodResolver(userLoginSchema),
   });
 
+  useEffect(() => {
+    if (searchParams.get("error")) {
+      toast({
+        title: "Sorry, we weren't able to log you in.",
+        description: searchParams.get("error") || "An unknown error occurred.",
+        variant: "destructive",
+      });
+    }
+  }, []);
+
   async function onSubmit(data: FormData) {
     setIsLoading(true);
 
@@ -41,6 +51,8 @@ export function UserLoginForm() {
     });
 
     if (signInResult.error) {
+      setIsLoading(false);
+
       return toast({
         title: "Something went wrong.",
         description: signInResult.error.message,
