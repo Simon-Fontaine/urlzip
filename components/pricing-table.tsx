@@ -60,7 +60,7 @@ export default function Pricing({ user, products, subscription }: Props) {
 
     if (!user) {
       setSelectedPrice(undefined);
-      router.push(`/login?redirect=${currentPath}`);
+      router.push(`/login?redirect_to=${currentPath}`);
     }
 
     const { error, sessionId } = await checkoutWithStripe(price, currentPath);
