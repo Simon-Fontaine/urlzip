@@ -1,11 +1,11 @@
 import { stripe } from "@/utils/stripe/config";
-// import {
-//   deletePriceRecord,
-//   deleteProductRecord,
-//   manageSubscriptionStatusChange,
-//   upsertPriceRecord,
-//   upsertProductRecord,
-// } from "@/utils/supabase/admin";
+import {
+  deletePriceRecord,
+  deleteProductRecord,
+  manageSubscriptionStatusChange,
+  upsertPriceRecord,
+  upsertProductRecord,
+} from "@/utils/supabase/admin";
 import Stripe from "stripe";
 
 const relevantEvents = new Set([
@@ -21,11 +21,10 @@ const relevantEvents = new Set([
   "customer.subscription.deleted",
 ]);
 
-export async function POST(req: Request) {
-  const body = await req.text();
-  const sig = req.headers.get("stripe-signature") as string;
-  const webhookSecret =
-    process.env.STRIPE_WEBHOOK_SECRET_LIVE ?? process.env.STRIPE_WEBHOOK_SECRET;
+export async function POST(request: Request) {
+  const body = await request.text();
+  const sig = request.headers.get("stripe-signature") as string;
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   let event: Stripe.Event;
 
   try {
@@ -43,37 +42,37 @@ export async function POST(req: Request) {
       switch (event.type) {
         case "product.created":
         case "product.updated":
-          // await upsertProductRecord(event.data.object as Stripe.Product);
+          await upsertProductRecord(event.data.object as Stripe.Product);
           break;
         case "price.created":
         case "price.updated":
-          // await upsertPriceRecord(event.data.object as Stripe.Price);
+          await upsertPriceRecord(event.data.object as Stripe.Price);
           break;
         case "price.deleted":
-          // await deletePriceRecord(event.data.object as Stripe.Price);
+          await deletePriceRecord(event.data.object as Stripe.Price);
           break;
         case "product.deleted":
-          // await deleteProductRecord(event.data.object as Stripe.Product);
+          await deleteProductRecord(event.data.object as Stripe.Product);
           break;
         case "customer.subscription.created":
         case "customer.subscription.updated":
         case "customer.subscription.deleted":
           const subscription = event.data.object as Stripe.Subscription;
-          // await manageSubscriptionStatusChange(
-          //   subscription.id,
-          //   subscription.customer as string,
-          //   event.type === "customer.subscription.created",
-          // );
+          await manageSubscriptionStatusChange(
+            subscription.id,
+            subscription.customer as string,
+            event.type === "customer.subscription.created",
+          );
           break;
         case "checkout.session.completed":
           const checkoutSession = event.data.object as Stripe.Checkout.Session;
           if (checkoutSession.mode === "subscription") {
             const subscriptionId = checkoutSession.subscription;
-            // await manageSubscriptionStatusChange(
-            //   subscriptionId as string,
-            //   checkoutSession.customer as string,
-            //   true,
-            // );
+            await manageSubscriptionStatusChange(
+              subscriptionId as string,
+              checkoutSession.customer as string,
+              true,
+            );
           }
           break;
         default:

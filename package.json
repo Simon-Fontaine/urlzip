@@ -9,7 +9,7 @@
     "stripe:login": "stripe login",
     "supabase:generate-migration": "supabase db diff | supabase migration new",
     "supabase:generate-seed": "supabase db dump --data-only -f supabase/seed.sql",
-    "supabase:generate-types": "supabase gen types typescript --local --schema public > types_db.ts",
+    "supabase:generate-types": "supabase gen types typescript --project-id esmmjstisevialqngpxq --schema public > types/supabase.ts",
     "supabase:link": "supabase link",
     "supabase:pull": "supabase db pull",
     "supabase:push": "supabase db push",

@@ -1,4 +1,5 @@
 import { Icons } from "./components/icons";
+import { Plan } from "./types/plan";
 import { LucideIcon } from "lucide-react";
 import { version } from "os";
 
@@ -27,6 +28,12 @@ export const config = {
     discord: "https://discord.com/",
     twitter: "https://twitter.com/",
   },
+};
+
+export const defaultPlan: Plan = {
+  max_urls: "30",
+  max_named_urls: "5",
+  redirection_delay: "10",
 };
 
 export const navigation: NavigationItem[] = [
